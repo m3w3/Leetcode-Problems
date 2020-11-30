@@ -1,4 +1,7 @@
 from typing import List
+"""
+https://leetcode.com/discuss/interview-question/819577/Throttling-Gateway-Hackerrank
+"""
 def droppedRequest(requestTime: List[int]) -> int:
 	# There is a way of tracking requests with duplicate violations
 	# using a hashmap (O(1) access time). But this has a O(n) space complexity.
