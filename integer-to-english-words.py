@@ -89,6 +89,5 @@ def two_digit_to_num(two_digit_list: List[int]):
     >>> two_digit_to_num([1, 8])
     18
     """
-    assert len(two_digit_list) == 2
     l_ = [str(two_digit_list[0]), str(two_digit_list[1])]
     return int(''.join(l_))
