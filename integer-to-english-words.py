@@ -30,7 +30,7 @@ class Solution:
             curr_start_index = num_leading_non_3s + i*3 # i.e. 22,|999|,222 -> 2 + 0*3 = 2
             curr_length_3s = str_length_3s(num_list[curr_start_index: curr_start_index + 3])
             
-            if curr_length_3s == '': continue
+            if curr_length_3s == '': continue # skip the '' or else they'll show up as extra spaces when joined
             l_.append(curr_length_3s)
             
             curr_suffix = THOUSANDS[num_three_blocks-1-i]
