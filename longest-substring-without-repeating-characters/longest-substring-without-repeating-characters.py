@@ -8,10 +8,10 @@ class Solution:
         seen = {}
         max_length, p1 = 0, 0
         for p2, char in enumerate(s):
-            if char in seen and p1 <= seen[char]:
-                p1 = seen[char] + 1
-            else:
+            if char not in seen or seen[char] < p1:
                 max_length = max(max_length, p2 - p1 + 1)
+            else:
+                p1 = seen[char] + 1
 
             seen[char] = p2
 
