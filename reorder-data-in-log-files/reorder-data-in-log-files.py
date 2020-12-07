@@ -2,7 +2,6 @@
 937. Reorder Data in Log Files
 https://leetcode.com/problems/reorder-data-in-log-files/
 """
-DIG = "0123456789"
 ​
 class Solution:
     def reorderLogFiles(self, logs: List[str]) -> List[str]:
@@ -13,8 +12,8 @@ class Solution:
 def split_logs(logs):
     let_logs, dig_logs = [], []
     for log in logs:
-        if log.split(" ")[1][0] not in DIG: let_logs.append(log)
-        else: dig_logs.append(log)
+        if log.split()[1].isdigit(): dig_logs.append(log)
+        else: let_logs.append(log)
     return let_logs, dig_logs
 ​
 def merge_sort(let_logs):
