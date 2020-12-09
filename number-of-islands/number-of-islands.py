@@ -1,11 +1,9 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         height = len(grid)
-        width = len(grid[0]) # since len(grid) > 0
-        if width == 0: return 0
-        else:
-            count = 0
-            visited = set()
+        width = len(grid[0])
+        count = 0
+        visited = set()
         
         for y in range(height):
             for x in range(width):
