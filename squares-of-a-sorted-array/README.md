@@ -1,26 +1,37 @@
-<h2>977. Squares of a Sorted Array</h2><h3>Easy</h3><hr><div><p>Given an integer array <code>nums</code>&nbsp;sorted in <strong>non-decreasing</strong> order,&nbsp;return <em>an array of <strong>the squares of each number</strong>&nbsp;sorted in non-decreasing order</em>.</p>
+"""
+977. Squares of a Sorted Array
+https://leetcode.com/problems/squares-of-a-sorted-array/
+"""
 
-<p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
-
-<pre><strong>Input:</strong> nums = [-4,-1,0,3,10]
-<strong>Output:</strong> [0,1,9,16,100]
-<strong>Explanation:</strong> After squaring, the array becomes [16,1,0,9,100].
-After sorting, it becomes [0,1,9,16,100].
-</pre>
-
-<p><strong>Example 2:</strong></p>
-
-<pre><strong>Input:</strong> nums = [-7,-3,2,3,11]
-<strong>Output:</strong> [4,9,9,49,121]
-</pre>
-
-<p>&nbsp;</p>
-<p><strong>Constraints:</strong></p>
-
-<ul>
-	<li><code><span>1 &lt;= nums.length &lt;= </span>10<sup>4</sup></code></li>
-	<li><code>-10<sup>4</sup> &lt;= nums[i] &lt;= 10<sup>4</sup></code></li>
-	<li><code>nums</code> is sorted in <strong>non-decreasing</strong> order.</li>
-</ul>
-</div>
+class Solution:
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        valley_index = smallest_non_neg_index(nums, n)
+        asc_min_index, desc_min_index = valley_index, valley_index - 1
+        nums, sorted_nums = [num ** 2 for num in nums], []
+        
+        # essentially merging 2x sorted lists at this point
+        while 0 <= desc_min_index and asc_min_index < n:
+            if nums[asc_min_index] < nums[desc_min_index]:
+                sorted_nums.append(nums[asc_min_index])
+                asc_min_index += 1
+            else:
+                sorted_nums.append(nums[desc_min_index])
+                desc_min_index -= 1
+        # handle any remaining values not placed
+        while 0 <= desc_min_index:
+            sorted_nums.append(nums[desc_min_index])
+            desc_min_index -= 1
+        while asc_min_index < n:
+            sorted_nums.append(nums[asc_min_index])
+            asc_min_index += 1
+        
+        return sorted_nums
+    
+def smallest_non_neg_index(nums, n):
+    if n == 1: return 0
+    curr_index = 0
+    while curr_index < n:
+        if nums[curr_index] >= 0: return curr_index
+        curr_index += 1
+    return curr_index - 1
