@@ -3,25 +3,16 @@
 https://leetcode.com/problems/k-closest-points-to-origin/
 """
 
+from heapq import *
 class Solution:
     def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
-        d_to_point, p_distances = {}, []
+        min_heap = []
         for point in points:
-            distance = point[0]**2 + point[1]**2
-            if distance not in d_to_point:
-                d_to_point[distance] = [point]
-                p_distances.append(distance)
-            else: 
-                d_to_point[distance].append(point)
-        
-        # now retrieve the top K distances
-        p_distances.sort()
-        return_l = []
-        for distance in p_distances:
-            curr_points_in_distance = len(d_to_point[distance])
-            if curr_points_in_distance >= K:
-                return return_l + d_to_point[distance][:K]
+            if len(min_heap) < K:
+                heappush(min_heap, (-(point[0]**2 + point[1]**2), point))
             else:
-                return_l += d_to_point[distance]
-                K -= curr_points_in_distance
-        return return_l
+                curr_neg_dist = -(point[0]**2 + point[1]**2)
+                # i.e. point = -19, curr_root = -20 -> put into heap
+                if curr_neg_dist > min_heap[0][0]:
+                    heapreplace(min_heap, (curr_neg_dist, point))
+        return [heap_element[1] for heap_element in min_heap]
