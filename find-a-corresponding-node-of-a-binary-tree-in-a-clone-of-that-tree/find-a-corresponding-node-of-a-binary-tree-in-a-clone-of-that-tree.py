@@ -13,9 +13,14 @@ https://leetcode.com/problems/find-a-corresponding-node-of-a-binary-tree-in-a-cl
 class Solution:
     def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
         # Solve using simple BFS
-        queue = deque([cloned])
-        while queue:
-            curr_node = queue.popleft()
-            if target.val == curr_node.val: return curr_node
-            if curr_node.left: queue.append(curr_node.left)
-            if curr_node.right: queue.append(curr_node.right)
+        original_q = deque([original])
+        cloned_q = deque([cloned])
+        while original_q:
+            curr_original, curr_cloned = original_q.popleft(), cloned_q.popleft()
+            if target == curr_original: return curr_cloned
+            if curr_original.left:
+                original_q.append(curr_original.left)
+                cloned_q.append(curr_cloned.left)
+            if curr_original.right:
+                original_q.append(curr_original.right)
+                cloned_q.append(curr_cloned.right)
