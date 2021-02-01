@@ -1,7 +1,6 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        n = len(nums)
-        lo, hi = 0, n - 1
+        lo, hi = 0, len(nums) - 1
         while(1):
             size = hi - lo
             if size < 3: return min(nums)
@@ -13,5 +12,6 @@ class Solution:
             # min is on left side of mid
             elif nums[lo] > nums[mid]:
                 hi = mid
+            # current array isn't rotated
             else:
                 return nums[lo]
