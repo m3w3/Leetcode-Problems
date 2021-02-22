@@ -1,3 +1,7 @@
+"""
+53. Maximum Subarray
+https://leetcode.com/problems/maximum-subarray/
+"""
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         global_max, prev_max = float('-inf'), 0
